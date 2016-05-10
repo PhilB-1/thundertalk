@@ -1,20 +1,14 @@
+<p><a href="/">Home</a></p>
+<p>To:<h2><%= @to %></h2></p>
+<p>From:<h3><%= @from %></h3></p><br><br>
 
-
-<form action="/chat" method="get">
-  <input type="text" name="from" id="from" placeholder="from">
-  <input type="text" name="to" id="to" placeholder="to">
-  <input type="submit" value="Start Private Chat">
-</form>
-
-<h1>Group</h1>
-<!-- <p>To: <a href="#">Ben</a> | <a href="#">James</a> | <a href="#">Phil</a></p> -->
 <article id="messages"></article>
 <form action="/message" method="post" id="msg-form">
   <div class=".container">
     <div class="row">
       <div class="col-lg-6">
         <div class="input-group">
-          <input type="text" class="form-control" id="name-input" name="name" placeholder="Name">
+          <input type="text" class="form-control" id="name-input" name="name" value="<%= @from %>">
           <input type="text" class="form-control" id="msg-input" name="name" placeholder="Msg">
           <span class="input-group-btn">
             <button class="btn btn-default" id="big-btn" type="submit">Go!</button>
