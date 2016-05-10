@@ -2,9 +2,10 @@ get '/' do
   erb :index
 end
 
-get '/name' do
-  @name = params[:name].downcase
-  erb :show
+get '/chat' do
+  @to = params[:to]
+  @from = params[:from]
+  erb :chat
 end
 
 

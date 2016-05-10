@@ -2,25 +2,77 @@ $(document).ready(function() {
 //   // This is called after the document has loaded in its entirety
 //   // This guarantees that any elements we bind to will exist on the page
 //   // when we try to bind to them
+  if($('h1').text() == "Group"){
+    var myDataRef = new Firebase('https://shining-inferno-8243.firebaseio.com/');
 
-  var myDataRef = new Firebase('https://shining-inferno-8243.firebaseio.com/');
 
-  $('#msg-form').on("submit", function(e) {
-    e.preventDefault();
-    var name = $('#name-input').val();
-    var text = $('#msg-input').val();
-    myDataRef.push({name: name, text: text});
-    $('#msg-input').val('');
-  });
-  myDataRef.on('child_added', function(snapshot) {
-    var message = snapshot.val();
-    displayChatMessage(message.name, message.text);
-  });
-  function displayChatMessage(name, text) {
-    // $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-    // $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-    $("#messages").append("<p><b>"+name+":</b> " + text);
-  };
+
+  // var myDataRef = new Firebase('https://shining-inferno-8243.firebaseio.com/' + endLink);
+
+  // var endLink = ""
+
+    // $('a').on('click', function(e){
+    //   e.preventDefault();
+    //   $('#messages').empty();
+    //   var conversation = []
+    //   conversation.push($(this).text().toLowerCase());
+    //   conversation.push($('#from').val().toLowerCase());
+    //   // var endLink = conversation.sort().join('-');
+    //   // myDataRef = new Firebase('https://shining-inferno-8243.firebaseio.com/' + endLink);
+    // })
+
+    $('#msg-form').on("submit", function(e) {
+      e.preventDefault();
+      var name = $('#name-input').val();
+      var text = $('#msg-input').val();
+      myDataRef.push({name: name, text: text});
+      $('#msg-input').val('');
+
+
+    });
+
+    myDataRef.on('child_added', function(snapshot) {
+      var message = snapshot.val();
+      displayChatMessage(message.name, message.text);
+    });
+
+
+    function displayChatMessage(name, text) {
+      // $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+      // $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      $("#messages").append("<p><b>"+name+":</b> " + text);
+    };
+  } else {
+
+    var conversation = []
+    conversation.push($('h2').text().toLowerCase());
+    conversation.push($('h3').text().toLowerCase());
+    var endLink = conversation.sort().join('-');
+    myDataRef = new Firebase('https://shining-inferno-8243.firebaseio.com/' + endLink);
+
+    $('#msg-form').on("submit", function(e) {
+      e.preventDefault();
+      var name = $('#name-input').val();
+      var text = $('#msg-input').val();
+      myDataRef.push({name: name, text: text});
+      $('#msg-input').val('');
+
+
+    });
+
+    myDataRef.on('child_added', function(snapshot) {
+      var message = snapshot.val();
+      displayChatMessage(message.name, message.text);
+    });
+
+
+    function displayChatMessage(name, text) {
+      // $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+      // $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+      $("#messages").append("<p><b>"+name+":</b> " + text);
+    };
+
+  }
 
 
 
